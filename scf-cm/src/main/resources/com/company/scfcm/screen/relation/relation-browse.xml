@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://relationBrowse.caption"
+        focusComponent="relationsTable">
+    <data readOnly="true">
+        <collection id="relationsDc"
+                    class="com.company.scfcm.entity.Relation">
+            <fetchPlan extends="_base"/>
+            <loader id="relationsDl">
+                <query>
+                    <![CDATA[select e from cm_Relation e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="relationsTable" spacing="true">
+        <filter id="filter"
+                dataLoader="relationsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="relationsTable"
+                    width="100%"
+                    dataContainer="relationsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="type"/>
+                <column id="code"/>
+                <column id="name"/>
+                <column id="localName"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="relationsTable.create"/>
+                <button id="editBtn" action="relationsTable.edit"/>
+                <button id="removeBtn" action="relationsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

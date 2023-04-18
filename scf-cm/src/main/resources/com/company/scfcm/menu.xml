@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/ui/menu">
+
+    <menu id="cm" caption="msg://com.company.scfcm/menu.addon" insertAfter="administration">
+        <item screen="cm_Country.browse" caption="msg://com.company.scfcm.screen.country/countryBrowse.menu"/>
+        <item screen="cm_City.browse" caption="msg://com.company.scfcm.screen.city/cityBrowse.menu"/>
+        <item screen="cm_District.browse" caption="msg://com.company.scfcm.screen.district/districtBrowse.menu"/>
+        <item screen="cm_Relation.browse" caption="msg://com.company.scfcm.screen.relation/relationBrowse.menu"/>
+    </menu>
+
+</menu-config>
