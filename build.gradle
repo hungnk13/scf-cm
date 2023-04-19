@@ -45,21 +45,21 @@ subprojects {
 
     publishing {
         repositories {
-            maven {
-                url = 'https://myrepo/releases/'
-                credentials {
-                    username rootProject.hasProperty('uploadUser') ? rootProject['uploadUser'] : 'admin'
-                    password rootProject.hasProperty('uploadPassword') ? rootProject['uploadPassword'] : 'admin'
-                }
-                allowInsecureProtocol = true
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/" + System.getenv("GITHUB_REPOSITORY"))
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
             }
         }
-        publications {
-            javaMaven(MavenPublication) {
-                artifactId = archName
-                from components.java
-            }
+    }
+    publications {
+        javaMaven(MavenPublication) {
+            artifactId = archName
+            from components.java
         }
+    }
     }
 
     // remove after https://youtrack.jetbrains.com/issue/IDEA-227215 is fixed
